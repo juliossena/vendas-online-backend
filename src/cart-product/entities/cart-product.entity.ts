@@ -11,7 +11,7 @@ import {
 } from 'typeorm';
 
 @Entity({ name: 'cart_product' })
-export class CartProdutEntity {
+export class CartProductEntity {
   @PrimaryGeneratedColumn('rowid')
   id: number;
 
