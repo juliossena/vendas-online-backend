@@ -1,5 +1,4 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { userEntityMock } from '../../user/__mocks__/user.mock';
 import { CategoryController } from '../category.controller';
 import { CategoryService } from '../category.service';
 import { categoryMock } from '../__mocks__/category.mock';
