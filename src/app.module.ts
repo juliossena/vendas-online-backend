@@ -14,8 +14,8 @@ import { CategoryModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
 import { CartModule } from './cart/cart.module';
 import { CartProductModule } from './cart-product/cart-product.module';
-import { Address2Controller } from './address2/address2.controller';
-import { Address2Controller } from './address2/address2.controller';
+import { PaymentStatusModule } from './payment-status/payment-status.module';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -44,8 +44,10 @@ import { Address2Controller } from './address2/address2.controller';
     ProductModule,
     CartModule,
     CartProductModule,
+    PaymentStatusModule,
+    PaymentModule,
   ],
-  controllers: [Address2Controller],
+  controllers: [],
   providers: [
     {
       provide: APP_GUARD,
