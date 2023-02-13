@@ -1,5 +1,5 @@
-import { OrderEntity } from 'src/order/entities/order.entity';
-import { PaymentStatusEntity } from 'src/payment-status/entities/payment-status.entity';
+import { OrderEntity } from '../../order/entities/order.entity';
+import { PaymentStatusEntity } from '../../payment-status/entities/payment-status.entity';
 import {
   Column,
   CreateDateColumn,

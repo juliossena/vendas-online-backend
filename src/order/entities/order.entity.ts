@@ -1,7 +1,7 @@
-import { AddressEntity } from 'src/address/entities/address.entity';
-import { OrderProductEntity } from 'src/order-product/entities/order-product.entity';
-import { PaymentEntity } from 'src/payment/entities/payment.entity';
-import { UserEntity } from 'src/user/entities/user.entity';
+import { AddressEntity } from '../../address/entities/address.entity';
+import { OrderProductEntity } from '../../order-product/entities/order-product.entity';
+import { PaymentEntity } from '../../payment/entities/payment.entity';
+import { UserEntity } from '../../user/entities/user.entity';
 import {
   Column,
   CreateDateColumn,

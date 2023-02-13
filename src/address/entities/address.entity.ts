@@ -10,7 +10,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { OrderEntity } from 'src/order/entities/order.entity';
+import { OrderEntity } from '../../order/entities/order.entity';
 
 @Entity({ name: 'address' })
 export class AddressEntity {
