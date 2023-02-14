@@ -1,4 +1,4 @@
-import { CreateOrderDTO } from 'src/order/dtos/create-order.dto';
+import { CreateOrderDTO } from '../../order/dtos/create-order.dto';
 import { ChildEntity, Column } from 'typeorm';
 import { PaymentEntity } from './payment.entity';
 
