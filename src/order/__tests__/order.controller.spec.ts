@@ -1,6 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { userEntityMock } from '../../user/__mocks__/user.mock';
 import { OrderController } from '../order.controller';
 import { OrderService } from '../order.service';
+import { orderMock } from '../__mocks__/order.mock';
 
 describe('OrderController', () => {
   let controller: OrderController;
@@ -12,7 +14,8 @@ describe('OrderController', () => {
         {
           provide: OrderService,
           useValue: {
-            createOrder: '',
+            createOrder: jest.fn().mockResolvedValue(orderMock),
+            findOrdersByUserId: jest.fn().mockResolvedValue([orderMock]),
           },
         },
       ],
@@ -26,5 +29,11 @@ describe('OrderController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
     expect(orderService).toBeDefined();
+  });
+
+  it('should return orders in findOrdersByUserId', async () => {
+    const orders = await controller.findOrdersByUserId(userEntityMock.id);
+
+    expect(orders).toEqual([orderMock]);
   });
 });
