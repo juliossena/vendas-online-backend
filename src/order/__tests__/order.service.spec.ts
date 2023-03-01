@@ -190,4 +190,24 @@ describe('OrderService', () => {
     expect(spyOrderProductService.mock.calls.length).toEqual(1);
     expect(spyCartServiceClear.mock.calls.length).toEqual(1);
   });
+
+  it('should return orders', async () => {
+    const spy = jest.spyOn(orderRepositoty, 'find');
+    const orders = await service.findAllOrders();
+
+    expect(orders).toEqual([orderMock]);
+    expect(spy.mock.calls[0][0]).toEqual({
+      relations: {
+        user: true,
+      },
+    });
+  });
+
+  it('should error in not found', async () => {
+    jest.spyOn(orderRepositoty, 'find').mockResolvedValue([]);
+
+    expect(service.findAllOrders()).rejects.toThrowError(
+      new NotFoundException('Orders not found'),
+    );
+  });
 });
