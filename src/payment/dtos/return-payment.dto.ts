@@ -1,4 +1,4 @@
-import { PaymentStatusEntity } from '../../payment-status/entities/payment-status.entity';
+import { ReturnPaymentStatus } from '../../payment-status/dtos/return-payment-status.dto';
 import { PaymentEntity } from '../entities/payment.entity';
 
 export class ReturnPaymentDTO {
@@ -8,7 +8,7 @@ export class ReturnPaymentDTO {
   discount: number;
   finalPrice: number;
   type: string;
-  paymentStatus?: PaymentStatusEntity;
+  paymentStatus?: ReturnPaymentStatus;
 
   constructor(payment: PaymentEntity) {
     this.id = payment.id;
@@ -17,6 +17,8 @@ export class ReturnPaymentDTO {
     this.discount = payment.discount;
     this.finalPrice = payment.finalPrice;
     this.type = payment.type;
-    this.paymentStatus = payment.paymentStatus;
+    this.paymentStatus = payment.paymentStatus
+      ? new ReturnPaymentStatus(payment.paymentStatus)
+      : undefined;
   }
 }
