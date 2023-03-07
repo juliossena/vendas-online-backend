@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { userEntityMock } from '../../user/__mocks__/user.mock';
 import { ReturnUserDto } from '../dtos/returnUser.dto';
+import { UserType } from '../enum/user-type.enum';
 import { UserController } from '../user.controller';
 import { UserService } from '../user.service';
 import { createUserMock } from '../__mocks__/createUser.mock';
@@ -41,6 +42,14 @@ describe('UserController', () => {
     const user = await controller.createUser(createUserMock);
 
     expect(user).toEqual(userEntityMock);
+  });
+
+  it('should return user Entity in createUser', async () => {
+    const spy = jest.spyOn(userService, 'createUser');
+    const user = await controller.createAdmin(createUserMock);
+
+    expect(user).toEqual(userEntityMock);
+    expect(spy.mock.calls[0][1]).toEqual(UserType.Admin);
   });
 
   it('should return ReturnUser in getAllUser', async () => {

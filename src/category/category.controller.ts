@@ -13,7 +13,7 @@ import { CreateCategory } from './dtos/create-category.dto';
 import { ReturnCategory } from './dtos/return-category.dto';
 import { CategoryEntity } from './entities/category.entity';
 
-@Roles(UserType.Admin, UserType.User)
+@Roles(UserType.Admin, UserType.Root, UserType.User)
 @Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
@@ -23,7 +23,7 @@ export class CategoryController {
     return this.categoryService.findAllCategories();
   }
 
-  @Roles(UserType.Admin)
+  @Roles(UserType.Admin, UserType.Root)
   @UsePipes(ValidationPipe)
   @Post()
   async createCategory(
