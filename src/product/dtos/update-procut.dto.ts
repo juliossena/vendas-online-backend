@@ -1,4 +1,4 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class UpdateProductDTO {
   @IsNumber()
@@ -12,4 +12,19 @@ export class UpdateProductDTO {
 
   @IsString()
   image: string;
+
+  @IsNumber()
+  weight?: number;
+
+  @IsNumber()
+  length?: number;
+
+  @IsNumber()
+  height?: number;
+
+  @IsNumber()
+  width?: number;
+
+  @IsNumber()
+  diameter?: number;
 }

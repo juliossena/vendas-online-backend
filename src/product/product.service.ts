@@ -66,6 +66,11 @@ export class ProductService {
 
     return this.productRepository.save({
       ...createProduct,
+      weight: createProduct.weight || 0,
+      width: createProduct.width || 0,
+      length: createProduct.length || 0,
+      diameter: createProduct.diameter || 0,
+      height: createProduct.height || 0,
     });
   }
 
