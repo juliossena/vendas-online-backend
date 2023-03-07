@@ -12,9 +12,9 @@ import { CreateProductDTO } from './dtos/create-product.dto';
 import { ProductEntity } from './entities/product.entity';
 import { UpdateProductDTO } from './dtos/update-procut.dto';
 import { CountProduct } from './dtos/count-product.dto';
-import { SizeProductDTO } from 'src/correios/dto/size-product.dto';
-import { CorreiosService } from 'src/correios/correios.service';
-import { CdServiceEnum } from 'src/correios/enums/cd-service.enum';
+import { SizeProductDTO } from '../correios/dto/size-product.dto';
+import { CorreiosService } from '../correios/correios.service';
+import { CdServiceEnum } from '../correios/enums/cd-service.enum';
 import { ReturnPriceDeliveryDto } from './dtos/return-price-delivery.dto';
 
 @Injectable()

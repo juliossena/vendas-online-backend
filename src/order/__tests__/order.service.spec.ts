@@ -51,6 +51,7 @@ describe('OrderService', () => {
           provide: OrderProductService,
           useValue: {
             createOrderProduct: jest.fn().mockResolvedValue(orderProductMock),
+            findAmountProductsByOrderId: jest.fn().mockResolvedValue([]),
           },
         },
         {

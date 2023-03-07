@@ -1,4 +1,4 @@
-import { ResponsePriceCorreios } from 'src/correios/dto/response-price-correios';
+import { ResponsePriceCorreios } from '../../correios/dto/response-price-correios';
 
 interface ReturnDelivery {
   deliveryTime: number;
