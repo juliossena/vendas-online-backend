@@ -7,11 +7,6 @@ import { ReturnCep } from './dto/return-cep.dto';
 export class CorreiosController {
   constructor(private readonly correiosService: CorreiosService) {}
 
-  @Get('/price')
-  async priceDelivery(): Promise<ResponsePriceCorreios> {
-    return this.correiosService.priceDelivery();
-  }
-
   @Get(':cep')
   async findAll(@Param('cep') cep: string): Promise<ReturnCep> {
     return this.correiosService.findAddressByCep(cep);
