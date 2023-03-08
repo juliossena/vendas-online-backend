@@ -56,6 +56,7 @@ describe('ProductService', () => {
     expect(service).toBeDefined();
     expect(categoryService).toBeDefined();
     expect(productRepository).toBeDefined();
+    expect(correiosService).toBeDefined();
   });
 
   it('should return all products', async () => {
@@ -118,9 +119,30 @@ describe('ProductService', () => {
   });
 
   it('should return product in find by id', async () => {
+    const spy = jest.spyOn(productRepository, 'findOne');
     const product = await service.findProductById(productMock.id);
 
     expect(product).toEqual(productMock);
+    expect(spy.mock.calls[0][0]).toEqual({
+      where: {
+        id: productMock.id,
+      },
+    });
+  });
+
+  it('should return product in find by id use relations', async () => {
+    const spy = jest.spyOn(productRepository, 'findOne');
+    const product = await service.findProductById(productMock.id, true);
+
+    expect(product).toEqual(productMock);
+    expect(spy.mock.calls[0][0]).toEqual({
+      where: {
+        id: productMock.id,
+      },
+      relations: {
+        category: true,
+      },
+    });
   });
 
   it('should return error in product not found', async () => {
