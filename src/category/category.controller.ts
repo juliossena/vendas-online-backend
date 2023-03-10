@@ -1,11 +1,14 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { DeleteResult } from 'typeorm';
 import { Roles } from '../decorators/roles.decorator';
 import { UserType } from '../user/enum/user-type.enum';
 import { CategoryService } from './category.service';
@@ -30,5 +33,13 @@ export class CategoryController {
     @Body() createCategory: CreateCategory,
   ): Promise<CategoryEntity> {
     return this.categoryService.createCategory(createCategory);
+  }
+
+  @Roles(UserType.Admin, UserType.Root)
+  @Delete(':categoryId')
+  async deleteCategory(
+    @Param('categoryId') categoryId: number,
+  ): Promise<DeleteResult> {
+    return this.categoryService.deleteCategory(categoryId);
   }
 }
