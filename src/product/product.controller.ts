@@ -11,6 +11,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { Pagination } from 'src/dtos/pagination.dto';
 import { DeleteResult } from 'typeorm';
 import { Roles } from '../decorators/roles.decorator';
 import { UserType } from '../user/enum/user-type.enum';
@@ -35,10 +36,12 @@ export class ProductController {
 
   @Roles(UserType.Admin, UserType.Root, UserType.User)
   @Get('/page')
-  async findAllPage(@Query('search') search: string): Promise<ReturnProduct[]> {
-    return (await this.productService.findAllPage(search)).map(
-      (product) => new ReturnProduct(product),
-    );
+  async findAllPage(
+    @Query('search') search?: string,
+    @Query('size') size?: number,
+    @Query('page') page?: number,
+  ): Promise<Pagination<ReturnProduct[]>> {
+    return this.productService.findAllPage(search, size, page);
   }
 
   @Roles(UserType.Admin, UserType.Root, UserType.User)
