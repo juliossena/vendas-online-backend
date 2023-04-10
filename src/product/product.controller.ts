@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HostParam,
   Param,
   Post,
   Put,
@@ -11,7 +10,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { Pagination } from 'src/dtos/pagination.dto';
+import { Pagination } from '../dtos/pagination.dto';
 import { DeleteResult } from 'typeorm';
 import { Roles } from '../decorators/roles.decorator';
 import { UserType } from '../user/enum/user-type.enum';

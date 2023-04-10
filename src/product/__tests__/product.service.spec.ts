@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { CategoryService } from '../../category/category.service';
 import { categoryMock } from '../../category/__mocks__/category.mock';
-import { In, Repository } from 'typeorm';
+import { ILike, In, Repository } from 'typeorm';
 import { ProductEntity } from '../entities/product.entity';
 import { ProductService } from '../product.service';
 import { createProductMock } from '../__mocks__/create-product.mock';
@@ -39,6 +39,7 @@ describe('ProductService', () => {
             findOne: jest.fn().mockResolvedValue(productMock),
             save: jest.fn().mockResolvedValue(productMock),
             delete: jest.fn().mockResolvedValue(returnDeleteMock),
+            findAndCount: jest.fn().mockResolvedValue([[productMock], 1]),
           },
         },
       ],
@@ -172,5 +173,50 @@ describe('ProductService', () => {
     expect(
       service.updateProduct(createProductMock, productMock.id),
     ).rejects.toThrowError();
+  });
+
+  it('should return product pagination', async () => {
+    const spy = jest.spyOn(productRepository, 'findAndCount');
+    const productsPagination = await service.findAllPage();
+
+    expect(productsPagination.data).toEqual([productMock]);
+    expect(productsPagination.meta).toEqual({
+      itemsPerPage: 10,
+      totalItems: 1,
+      currentPage: 1,
+      totalPages: 1,
+    });
+    expect(spy.mock.calls[0][0]).toEqual({
+      take: 10,
+      skip: 0,
+    });
+  });
+
+  it('should return product pagination send size and page', async () => {
+    const mockSize = 432;
+    const mockPage = 532;
+    const productsPagination = await service.findAllPage(
+      undefined,
+      mockSize,
+      mockPage,
+    );
+
+    expect(productsPagination.data).toEqual([productMock]);
+    expect(productsPagination.meta).toEqual({
+      itemsPerPage: mockSize,
+      totalItems: 1,
+      currentPage: mockPage,
+      totalPages: 1,
+    });
+  });
+
+  it('should return product pagination search', async () => {
+    const mockSearch = 'mockSearch';
+    const spy = jest.spyOn(productRepository, 'findAndCount');
+    await service.findAllPage(mockSearch);
+
+    expect(spy.mock.calls[0][0].where).toEqual({
+      name: ILike(`%${mockSearch}%`),
+    });
   });
 });

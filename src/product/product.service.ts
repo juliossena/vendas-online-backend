@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CategoryService } from '../category/category.service';
-import { DeleteResult, ILike, In, Like, Repository } from 'typeorm';
+import { DeleteResult, ILike, In, Repository } from 'typeorm';
 import { CreateProductDTO } from './dtos/create-product.dto';
 import { ProductEntity } from './entities/product.entity';
 import { UpdateProductDTO } from './dtos/update-procut.dto';
@@ -16,7 +16,7 @@ import { SizeProductDTO } from '../correios/dto/size-product.dto';
 import { CorreiosService } from '../correios/correios.service';
 import { CdServiceEnum } from '../correios/enums/cd-service.enum';
 import { ReturnPriceDeliveryDto } from './dtos/return-price-delivery.dto';
-import { Pagination, PaginationMeta } from 'src/dtos/pagination.dto';
+import { Pagination, PaginationMeta } from '../dtos/pagination.dto';
 
 const DEFAULT_PAGE_SIZE = 10;
 const FIRST_PAGE = 1;
